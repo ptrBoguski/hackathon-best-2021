@@ -26,19 +26,26 @@ namespace HackathonBEST
     {
         [DllImport("kernel32.dll")]
         private static extern bool AttachConsole(int dwProcessId);
+
+        private EdgeDetector edgeDetector;
         
         public MainWindow()
         {
             InitializeComponent();
             AttachConsole(-1);
+            edgeDetector = new EdgeDetector();
         }
 
         private void ImageDropZone_OnDrop(object sender, DragEventArgs e)
         {
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
             {
-                var filePath = ((string[]) e.Data.GetData(DataFormats.FileDrop))[0];
-                LoadFile(filePath);
+                var filePaths = (string[]) e.Data.GetData(DataFormats.FileDrop);
+
+                if (filePaths != null)
+                {
+                    LoadFile(filePaths[0]);
+                }
             }
         }
 
@@ -55,8 +62,14 @@ namespace HackathonBEST
 
         private void LoadFile(string path)
         {
+            edgeDetector.FilePath = path;
             var name = Path.GetFileName(path);
             FileNameLabel.Content = name;
+        }
+
+        private void ExecuteButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            edgeDetector.Execute();
         }
     }
 }

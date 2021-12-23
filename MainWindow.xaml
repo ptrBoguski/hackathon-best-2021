@@ -45,7 +45,7 @@
             </StackPanel>
             
             
-            <Button DockPanel.Dock="Right" Margin="10,0,0,0">Execute</Button>
+            <Button DockPanel.Dock="Right" Margin="10,0,0,0" Name="ExecuteButton" Click="ExecuteButton_OnClick">Execute</Button>
         </DockPanel>
         <StatusBar Grid.Row="2" Grid.ColumnSpan="2" DockPanel.Dock="Bottom">
             <StatusBar.ItemsPanel>
