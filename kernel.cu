@@ -56,7 +56,7 @@ __global__ void sobel(unsigned char *red, unsigned char *out, int width, int hei
     // 0 - B 1 - G 2 - R 3 - Alpha?
 }
  
-void hello(char *red, char *out, int width, int height){
+void run(char *red, char *out, int width, int height){
     cudaEvent_t start, stop;
     cudaEventCreate(&start);
     cudaEventCreate(&stop);
