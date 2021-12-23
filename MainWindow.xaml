@@ -18,11 +18,11 @@
         </Grid.ColumnDefinitions>
         
         <GroupBox Header="Input" Margin="10">
-            <StackPanel Background="LightGray" Margin="10" DockPanel.Dock="Bottom">
+            <StackPanel Background="LightGray" Margin="10" DockPanel.Dock="Bottom" AllowDrop="True" Name="ImageDropZone" Drop="ImageDropZone_OnDrop">
                     <Label HorizontalAlignment="Center" Margin="0,30,0,0" Content="Drop image here" FontSize="18"/>
                     <Label HorizontalAlignment="Center" Margin="0,-10,0,0" Content="or" FontSize="15"/>
-                    <Button Content="Browse" Height="30" Width="80" FontSize="12"/>
-                    <Label HorizontalAlignment="Center" Margin="0,50,0,0" Content="No image chosen" FontSize="24"/>
+                    <Button Content="Browse" Height="30" Width="80" FontSize="12" Name="BrowseButton" Click="BrowseButton_OnClick"/>
+                    <Label HorizontalAlignment="Center" Margin="0,50,0,0" Name="FileNameLabel" Content="No image chosen" FontSize="24"/>
             </StackPanel>
         </GroupBox>
         <GroupBox Grid.Column="1" Header="Output" Margin="10">
@@ -30,17 +30,23 @@
         </GroupBox>
         <StackPanel Grid.Row="1" Margin="5">
             <DockPanel VerticalAlignment="Center">
-                <Label DockPanel.Dock="Left" FontWeight="Bold">Something 1:</Label>
+                <Label DockPanel.Dock="Left" FontWeight="Bold" Width="120">Something:</Label>
                 <Slider Maximum="255" TickPlacement="BottomRight" TickFrequency="5" IsSnapToTickEnabled="True" Name="ex1" />
             </DockPanel>
             <DockPanel VerticalAlignment="Center">
-                <Label DockPanel.Dock="Left" FontWeight="Bold">Something 2:</Label>
+                <Label DockPanel.Dock="Left" FontWeight="Bold" Width="120">Something else:</Label>
                 <Slider Maximum="255" TickPlacement="BottomRight" TickFrequency="5" IsSnapToTickEnabled="True" Name="ex2" />
             </DockPanel>
         </StackPanel>
-        <StackPanel Grid.Column="1" Grid.Row="1" Margin="5">
-            <Button>Execute</Button>
-        </StackPanel>
+        <DockPanel Grid.Column="1" Grid.Row="1" Margin="5">
+            <StackPanel>
+                <CheckBox DockPanel.Dock="Left" Width="250" Margin="10,5">Enable auto refresh</CheckBox>
+                <CheckBox DockPanel.Dock="Left" Width="250" Margin="10,5">Enable something</CheckBox>
+            </StackPanel>
+            
+            
+            <Button DockPanel.Dock="Right" Margin="10,0,0,0">Execute</Button>
+        </DockPanel>
         <StatusBar Grid.Row="2" Grid.ColumnSpan="2" DockPanel.Dock="Bottom">
             <StatusBar.ItemsPanel>
                 <ItemsPanelTemplate>
@@ -59,9 +65,9 @@
             <StatusBarItem Grid.Column="1">
                 <TextBlock Text="Last time: 2.46s" />
             </StatusBarItem>
-            <StatusBarItem Grid.Column="2" HorizontalContentAlignment="Stretch">
-                <ProgressBar Value="50" Width="Auto" Height="16" />
-            </StatusBarItem>
+            <!-- <StatusBarItem Grid.Column="2" HorizontalContentAlignment="Stretch"> -->
+            <!--     <ProgressBar Value="50" Width="Auto" Height="16" /> -->
+            <!-- </StatusBarItem> -->
         </StatusBar>
         
         
