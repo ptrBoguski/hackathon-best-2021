@@ -11,7 +11,7 @@ namespace HackathonBEST
     
     public class CpuEdgeDetector: EdgeDetector
     {
-    [DllImport(@"C:\Users\Shadow\asdasdasd\hackathon-best-2021\CpuKernel.dll",  CallingConvention=CallingConvention.Cdecl)]
+    [DllImport(@"CpuKernel.dll",  CallingConvention=CallingConvention.Cdecl)]
     private static extern void run(byte[] red, byte[] x, int width, int height);
         public override void Execute()
         {
