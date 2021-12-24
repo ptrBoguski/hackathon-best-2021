@@ -30,12 +30,12 @@
                     <Label Margin="5,0,0,0" Height="25" Content="or drop here" />  
                 </StackPanel>  
                 <StackPanel>  
-                    <Image Name="ImageViewer" Source="Kwiaty.jpg"/>         
+                    <Image Name="InputImageViewer" Source="Kwiaty.jpg"/>         
                 </StackPanel> 
             </DockPanel>
         </GroupBox>
         <GroupBox Grid.Column="1" Header="Output" Margin="10">
-            
+            <Image Name="OutputImageViewer" Source="Kwiaty.jpg"/>
         </GroupBox>
         <StackPanel Grid.Row="1" Margin="5">
             <DockPanel VerticalAlignment="Center">

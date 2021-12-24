@@ -33,7 +33,8 @@ namespace HackathonBEST
         {
             InitializeComponent();
             AttachConsole(-1);
-            edgeDetector = new EdgeDetector();
+            edgeDetector = new CpuEdgeDetector();
+            edgeDetector.OnDetectionCompleted += DisplayOutputImage;
         }
 
         private void ImageDropZone_OnDrop(object sender, DragEventArgs e)
@@ -74,12 +75,17 @@ namespace HackathonBEST
             bitmap.BeginInit();  
             bitmap.UriSource = new Uri(path);  
             bitmap.EndInit();
-            ImageViewer.Source = bitmap;
+            InputImageViewer.Source = bitmap;
         }
 
         private void ExecuteButton_OnClick(object sender, RoutedEventArgs e)
         {
             edgeDetector.Execute();
+        }
+
+        private void DisplayOutputImage(BitmapImage image)
+        {
+            OutputImageViewer.Source = image;
         }
     }
 }
