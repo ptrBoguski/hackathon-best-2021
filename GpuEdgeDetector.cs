@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Windows.Media.Imaging;
 using System.Runtime.InteropServices;
 using System.Drawing;
@@ -9,9 +9,9 @@ namespace HackathonBEST
 {
     
     
-    public class CpuEdgeDetector: EdgeDetector
+    public class GpuEdgeDetector: EdgeDetector
     {
-    [DllImport(@"CpuKernel.dll",  CallingConvention=CallingConvention.Cdecl)]
+    [DllImport(@"NvidiaKernel.dll",  CallingConvention=CallingConvention.Cdecl)]
     private static extern void run(byte[] red, byte[] x, int width, int height);
         public override void Execute()
         {
@@ -22,7 +22,7 @@ namespace HackathonBEST
             OnDetectionCompleted.Invoke(bitmap);
             
             var start = DateTime.Now;
-            // Bitmap i = new Bitmap("51766629975_1eec90d220_o.jpg");
+            // Bitmap i = new Bitmap("51766629975_1eec90d220_o.jpg")
             Bitmap i = new Bitmap(FilePath);
             Console.WriteLine(i);
             int width = i.Width;
