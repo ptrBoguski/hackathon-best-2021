@@ -18,15 +18,24 @@
         </Grid.ColumnDefinitions>
         
         <GroupBox Header="Input" Margin="10">
-            <StackPanel Background="LightGray" Margin="10" DockPanel.Dock="Bottom" AllowDrop="True" Name="ImageDropZone" Drop="ImageDropZone_OnDrop">
-                    <Label HorizontalAlignment="Center" Margin="0,30,0,0" Content="Drop image here" FontSize="18"/>
-                    <Label HorizontalAlignment="Center" Margin="0,-10,0,0" Content="or" FontSize="15"/>
-                    <Button Content="Browse" Height="30" Width="80" FontSize="12" Name="BrowseButton" Click="BrowseButton_OnClick"/>
-                    <Label HorizontalAlignment="Center" Margin="0,50,0,0" Name="FileNameLabel" Content="No image chosen" FontSize="24"/>
-            </StackPanel>
+            <DockPanel>
+                <StackPanel AllowDrop="True" Drop="ImageDropZone_OnDrop" DockPanel.Dock="Top" Orientation="Horizontal" Background="LightBlue" Height="40">  
+                    <Label Margin="10,0,0,0" Height="23" Name="Label1">  
+                        Current File:  
+                    </Label>  
+                    <Label Margin="5,0,0,0" Height="25" Name="FileNameLabel" Width="100" />  
+                    <Button Margin="5,0,0,0" Height="23" Name="BrowseButton" Click="BrowseButton_OnClick" Width="75" >  
+                        Browse  
+                    </Button>    
+                    <Label Margin="5,0,0,0" Height="25" Content="or drop here" />  
+                </StackPanel>  
+                <StackPanel>  
+                    <Image Name="ImageViewer" Source="Kwiaty.jpg"/>         
+                </StackPanel> 
+            </DockPanel>
         </GroupBox>
         <GroupBox Grid.Column="1" Header="Output" Margin="10">
-           
+            
         </GroupBox>
         <StackPanel Grid.Row="1" Margin="5">
             <DockPanel VerticalAlignment="Center">
@@ -39,13 +48,17 @@
             </DockPanel>
         </StackPanel>
         <DockPanel Grid.Column="1" Grid.Row="1" Margin="5">
-            <StackPanel>
-                <CheckBox DockPanel.Dock="Left" Width="250" Margin="10,5">Enable auto refresh</CheckBox>
-                <CheckBox DockPanel.Dock="Left" Width="250" Margin="10,5">Enable something</CheckBox>
+            <StackPanel Width="200" Margin="10,0,0,0">
+                <Label FontWeight="Bold">Run on:</Label>
+                <RadioButton>CPU</RadioButton>
+                <RadioButton>GPU (Nvidia only)</RadioButton>
             </StackPanel>
+            <DockPanel Margin="0,0,10,0">
+                <Button DockPanel.Dock="Top" Height="40" Margin="0,0,0,5" Name="ExecuteButton" Click="ExecuteButton_OnClick">Execute</Button>
+                <CheckBox>Enable auto execute</CheckBox>
+            </DockPanel>
             
             
-            <Button DockPanel.Dock="Right" Margin="10,0,0,0" Name="ExecuteButton" Click="ExecuteButton_OnClick">Execute</Button>
         </DockPanel>
         <StatusBar Grid.Row="2" Grid.ColumnSpan="2" DockPanel.Dock="Bottom">
             <StatusBar.ItemsPanel>

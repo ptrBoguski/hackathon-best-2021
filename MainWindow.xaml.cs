@@ -62,9 +62,19 @@ namespace HackathonBEST
 
         private void LoadFile(string path)
         {
+            DisplayInputImage(path);
             edgeDetector.FilePath = path;
             var name = Path.GetFileName(path);
             FileNameLabel.Content = name;
+        }
+
+        private void DisplayInputImage(string path)
+        {
+            BitmapImage bitmap = new BitmapImage();  
+            bitmap.BeginInit();  
+            bitmap.UriSource = new Uri(path);  
+            bitmap.EndInit();
+            ImageViewer.Source = bitmap;
         }
 
         private void ExecuteButton_OnClick(object sender, RoutedEventArgs e)
