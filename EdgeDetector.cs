@@ -5,8 +5,9 @@ namespace HackathonBEST
 {
     public abstract class EdgeDetector
     {
-        public string FilePath { get; set; }
         public Action<BitmapImage> OnDetectionCompleted;
-        public abstract void Execute();
+        public abstract void Execute(string filePath);
     }
+
+    
 }

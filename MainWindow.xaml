@@ -50,8 +50,8 @@
         <DockPanel Grid.Column="1" Grid.Row="1" Margin="5">
             <StackPanel Width="200" Margin="10,0,0,0">
                 <Label FontWeight="Bold">Run on:</Label>
-                <RadioButton IsChecked="True">CPU</RadioButton>
-                <RadioButton>GPU (Nvidia only)</RadioButton>
+                <RadioButton Name="UseCPUButton" Click="UseCPUButton_OnClick" IsChecked="True">CPU</RadioButton>
+                <RadioButton Name="UseGPUButton" Click="UseGPUButton_OnClick">GPU (Nvidia only)</RadioButton>
             </StackPanel>
             <DockPanel Margin="0,0,10,0">
                 <Button DockPanel.Dock="Top" Height="40" Margin="0,0,0,5" Name="ExecuteButton" Click="ExecuteButton_OnClick">Execute</Button>

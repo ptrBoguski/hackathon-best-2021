@@ -26,15 +26,14 @@ namespace HackathonBEST
     {
         [DllImport("kernel32.dll")]
         private static extern bool AttachConsole(int dwProcessId);
-
-        private EdgeDetector edgeDetector;
+        
+        private DetectionMethod detectionMethod = DetectionMethod.CPU;
+        private string currentFilePath;
         
         public MainWindow()
         {
             InitializeComponent();
             AttachConsole(-1);
-            edgeDetector = new CpuEdgeDetector();
-            edgeDetector.OnDetectionCompleted += DisplayOutputImage;
         }
 
         private void ImageDropZone_OnDrop(object sender, DragEventArgs e)
@@ -64,10 +63,11 @@ namespace HackathonBEST
         private void LoadFile(string path)
         {
             DisplayInputImage(path);
-            edgeDetector.FilePath = path;
+            currentFilePath = path;
             var name = Path.GetFileName(path);
             FileNameLabel.Content = name;
         }
+        
 
         private void DisplayInputImage(string path)
         {
@@ -80,12 +80,29 @@ namespace HackathonBEST
 
         private void ExecuteButton_OnClick(object sender, RoutedEventArgs e)
         {
-            edgeDetector.Execute();
+            var edgeDetector = detectionMethod.GetEdgeDetector();
+            edgeDetector.OnDetectionCompleted += DisplayOutputImage;
+            edgeDetector.Execute(currentFilePath);
         }
 
         private void DisplayOutputImage(BitmapImage image)
         {
             OutputImageViewer.Source = image;
+        }
+
+        private void ChangeDetectionMethod(DetectionMethod detectionMethod)
+        {
+            this.detectionMethod = detectionMethod;
+        }
+
+        private void UseCPUButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            ChangeDetectionMethod(DetectionMethod.CPU);
+        }
+
+        private void UseGPUButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            ChangeDetectionMethod(DetectionMethod.GPU);
         }
     }
 }
