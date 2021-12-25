@@ -11,29 +11,21 @@ namespace HackathonBEST
     
     public class CpuEdgeDetector: EdgeDetector
     {
-    [DllImport(@"CpuKernel.dll",  CallingConvention=CallingConvention.Cdecl)]
-    private static extern void run(byte[] red, byte[] x, int width, int height);
+        [DllImport(@"CpuKernel.dll",  CallingConvention=CallingConvention.Cdecl)]
+        private static extern void run(byte[] red, byte[] x, int width, int height);
         public override void Execute()
         {
-            BitmapImage bitmap = new BitmapImage();  
-            bitmap.BeginInit();  
-            bitmap.UriSource = new Uri(FilePath);  
-            bitmap.EndInit();
-            OnDetectionCompleted.Invoke(bitmap);
-            
             var start = DateTime.Now;
-            // Bitmap i = new Bitmap("51766629975_1eec90d220_o.jpg");
             Bitmap i = new Bitmap(FilePath);
             Console.WriteLine(i);
             int width = i.Width;
             int height = i.Height;
             Rectangle rect = new Rectangle(0,0, width, height);
-            System.Drawing.Imaging.BitmapData bmpData = i.LockBits(rect, 
-                System.Drawing.Imaging.ImageLockMode.ReadWrite, PixelFormat.Format32bppRgb);
+            BitmapData bmpData = i.LockBits(rect, ImageLockMode.ReadWrite, PixelFormat.Format32bppRgb);
             IntPtr ptr = bmpData.Scan0;
             int bytes  = i.Width * i.Height * 4;
             byte[] rgbValues = new byte[bytes];
-            System.Runtime.InteropServices.Marshal.Copy(ptr, rgbValues, 0, bytes);
+            Marshal.Copy(ptr, rgbValues, 0, bytes);
             Console.WriteLine("skonczone kopiowanie");
             Console.WriteLine("odpalanie kernela");
             byte [] greyscale = new byte[bytes];
