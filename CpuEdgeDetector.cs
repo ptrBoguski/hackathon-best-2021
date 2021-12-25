@@ -11,9 +11,9 @@ namespace HackathonBEST
     
     public class CpuEdgeDetector: EdgeDetector
     {
-        [DllImport(@"CpuKernel.dll",  CallingConvention=CallingConvention.Cdecl)]
-        private static extern void run(byte[] red, byte[] x, int width, int height);
-        public override void Execute(string filePath)
+    [DllImport(@"CpuKernel.dll",  CallingConvention=CallingConvention.Cdecl)]
+    private static extern void run(byte[] red, byte[] x, int width, int height, float[] ms);
+        public override void Execute()
         {
             var start = DateTime.Now;
             Bitmap i = new Bitmap(filePath);
@@ -29,7 +29,8 @@ namespace HackathonBEST
             Console.WriteLine("skonczone kopiowanie");
             Console.WriteLine("odpalanie kernela");
             byte [] greyscale = new byte[bytes];
-            run(rgbValues, greyscale, width,height);
+            float [] ms = new float[1];
+            run(rgbValues, greyscale, width,height, ms);
             Console.WriteLine("zakonczenie kernela");
             Bitmap result = new Bitmap(width, height);
             BitmapData resultData = result.LockBits(rect, 
@@ -38,7 +39,7 @@ namespace HackathonBEST
             var stop = DateTime.Now;
             result.UnlockBits(resultData);
             i.UnlockBits(bmpData);
-            result.Save("result.png",ImageFormat.Png);
+            result.Save(@"C:\Users\Shadow\asdasdasd\hackathon-best-2021\resultCPU.jpg",ImageFormat.Png);
             TimeSpan diff = stop - start;
             Console.Write(diff);
             using (MemoryStream mem = new MemoryStream())
@@ -52,6 +53,7 @@ namespace HackathonBEST
                 bitmapImage.EndInit();
                 OnDetectionCompleted.Invoke(bitmapImage, diff);
             }
+            
         }
     }
 }
