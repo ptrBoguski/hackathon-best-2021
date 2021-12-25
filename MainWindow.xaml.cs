@@ -81,10 +81,16 @@ namespace HackathonBEST
         private void ExecuteButton_OnClick(object sender, RoutedEventArgs e)
         {
             var edgeDetector = detectionMethod.GetEdgeDetector();
-            edgeDetector.OnDetectionCompleted += DisplayOutputImage;
+            edgeDetector.OnDetectionCompleted += DetectionCompleted;
             edgeDetector.Execute(currentFilePath);
         }
 
+        private void DetectionCompleted(BitmapImage image, TimeSpan duration)
+        {
+            DisplayOutputImage(image);
+            LastDurationText.Text = $"Last time: {duration.Seconds.ToString()}.{duration.Milliseconds}s";
+        }
+        
         private void DisplayOutputImage(BitmapImage image)
         {
             OutputImageViewer.Source = image;

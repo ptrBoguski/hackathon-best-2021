@@ -76,7 +76,7 @@
                 <TextBlock Text="Ready" />
             </StatusBarItem>
             <StatusBarItem Grid.Column="1">
-                <TextBlock Text="Last time: 2.46s" />
+                <TextBlock Name="LastDurationText" Text="Last time: 2.46s" />
             </StatusBarItem>
             <!-- <StatusBarItem Grid.Column="2" HorizontalContentAlignment="Stretch"> -->
             <!--     <ProgressBar Value="50" Width="Auto" Height="16" /> -->

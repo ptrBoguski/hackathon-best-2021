@@ -53,7 +53,7 @@ namespace HackathonBEST
                 bitmapImage.StreamSource = mem;
                 bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
                 bitmapImage.EndInit();
-                OnDetectionCompleted.Invoke(bitmapImage);
+                OnDetectionCompleted.Invoke(bitmapImage, diff);
             }
         }
     }

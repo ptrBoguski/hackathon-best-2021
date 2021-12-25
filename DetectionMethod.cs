@@ -12,12 +12,11 @@
         {
             switch (detectionMethod) 
             {
-                case  DetectionMethod.CPU:
+                case DetectionMethod.CPU:
                     return new CpuEdgeDetector();
                 case DetectionMethod.GPU:
                     return new GpuEdgeDetector();
             }
-
             return null;
         }
     }
