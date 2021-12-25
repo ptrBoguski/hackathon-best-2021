@@ -41,8 +41,6 @@ namespace HackathonBEST
             var stop = DateTime.Now;
             result.UnlockBits(resultData);
             i.UnlockBits(bmpData);
-            result.Save(@"C:\Users\Shadow\asdasdasd\hackathon-best-2021\result.jpg",ImageFormat.Png);
-            
             TimeSpan diff = stop - start;
             Console.Write(diff);
             using (MemoryStream mem = new MemoryStream())
