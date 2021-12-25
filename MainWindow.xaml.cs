@@ -110,5 +110,10 @@ namespace HackathonBEST
         {
             ChangeDetectionMethod(DetectionMethod.GPU);
         }
+
+        private void SaveButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

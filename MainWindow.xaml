@@ -18,7 +18,7 @@
         </Grid.ColumnDefinitions>
         
         <GroupBox Header="Input" Margin="10">
-            <DockPanel>
+            <DockPanel >
                 <StackPanel AllowDrop="True" Drop="ImageDropZone_OnDrop" DockPanel.Dock="Top" Orientation="Horizontal" Background="LightBlue" Height="40">  
                     <Label Margin="10,0,0,0" Height="23" Name="Label1">  
                         Current File:  
@@ -29,13 +29,25 @@
                     </Button>    
                     <Label Margin="5,0,0,0" Height="25" Content="or drop here" />  
                 </StackPanel>  
-                <StackPanel>  
+                <StackPanel AllowDrop="True" Drop="ImageDropZone_OnDrop">  
                     <Image Name="InputImageViewer" Source="Kwiaty.jpg"/>         
                 </StackPanel> 
             </DockPanel>
         </GroupBox>
         <GroupBox Grid.Column="1" Header="Output" Margin="10">
-            <Image Name="OutputImageViewer" Source="Kwiaty.jpg"/>
+            <DockPanel>
+                <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Background="LightBlue" Height="40">
+                    <Label Margin="10,0,0,0" Height="23">  
+                        Save output to file:
+                    </Label>    
+                    <Button Margin="150,0,0,0" Height="23" Name="SaveButton" Click="SaveButton_OnClick" Width="75" >  
+                        Save  
+                    </Button>    
+                </StackPanel>  
+                <StackPanel>  
+                    <Image Name="OutputImageViewer" Source="Kwiaty.jpg"/>         
+                </StackPanel> 
+            </DockPanel>
         </GroupBox>
         <StackPanel Grid.Row="1" Margin="5">
             <DockPanel VerticalAlignment="Center">
