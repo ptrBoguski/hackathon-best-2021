@@ -6,13 +6,13 @@ extern "C"
 __declspec(dllexport) void run(char *red, char *out, int width, int height)
 {
        int radius = 1;
-       int ix = 1;
+       int ix = 0;
        int stride = 1;
        for(int x = ix ; x < width*height;x += stride){
            int pos_x = x % width;
            int pos_y = x / width;
-           float sum1 = 0;
-           float sum2 = 0;
+           long long sum1 = 0;
+           long long sum2 = 0;
            unsigned char val = 0;// red[x*4] / 3 + red[x*4 + 1] / 3 + red[x*4 + 2] / 3;
            float sobel_kernel_x[9] = {1,1,1,0,0,0,-1,-1,-1};
            float sobel_kernel_y[9] = {-1,0,1,-1,0,1,-1,0,1};
@@ -26,7 +26,7 @@ __declspec(dllexport) void run(char *red, char *out, int width, int height)
                    for(int y2 = -radius; y2 <= radius; y2++){
                    float k_value = -(x2*x2 + y2*y2 + 1);
                    int index = x + y2 * width + x2;
-                   int local_val =  red[index*4] / 3 + red[index*4 + 1] / 3 + red[index*4 + 2] / 3;
+                   int local_val = (unsigned char) red[index*4] / 3 + (unsigned char) red[index*4 + 1] / 3 + (unsigned char) red[index*4 + 2] / 3;
                    dot += local_val / k_value ;
                    sum += k_value;
                    sum1 += sobel_kernel_x[k_id] * local_val;
