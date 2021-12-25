@@ -2,6 +2,7 @@
 
 extern "C"
 { 
+    //TODO 
 __declspec(dllexport) void run(char *red, char *out, int width, int height)
 {
        int radius = 1;
@@ -12,9 +13,9 @@ __declspec(dllexport) void run(char *red, char *out, int width, int height)
            int pos_y = x / width;
            float sum1 = 0;
            float sum2 = 0;
-           unsigned char val =  red[x*4] / 3 + red[x*4 + 1] / 3 + red[x*4 + 2] / 3;
-           float sobel_kernel_x[9] = {1,2,1,0,0,0,-1,-2,-1};
-           float sobel_kernel_y[9] = {-1,0,1,-2,0,2,-1,0,1};
+           unsigned char val = 0;// red[x*4] / 3 + red[x*4 + 1] / 3 + red[x*4 + 2] / 3;
+           float sobel_kernel_x[9] = {1,1,1,0,0,0,-1,-1,-1};
+           float sobel_kernel_y[9] = {-1,0,1,-1,0,1,-1,0,1};
            if(pos_x > radius && pos_x + radius <  width && pos_y > radius && pos_y + radius < height)
            {
                float dot = 0;
@@ -25,7 +26,7 @@ __declspec(dllexport) void run(char *red, char *out, int width, int height)
                    for(int y2 = -radius; y2 <= radius; y2++){
                    float k_value = -(x2*x2 + y2*y2 + 1);
                    int index = x + y2 * width + x2;
-                   unsigned char local_val =  red[index*4] / 3 + red[index*4 + 1] / 3 + red[index*4 + 2] / 3;
+                   int local_val =  red[index*4] / 3 + red[index*4 + 1] / 3 + red[index*4 + 2] / 3;
                    dot += local_val / k_value ;
                    sum += k_value;
                    sum1 += sobel_kernel_x[k_id] * local_val;
@@ -33,12 +34,12 @@ __declspec(dllexport) void run(char *red, char *out, int width, int height)
                    k_id++;
                   }
               }
-              val =(unsigned char)sqrt(sum1*sum1 + sum2*sum2);
-              val = val > 70 ? 255 : 0;
-               out[x*4 + 0] =  val;
-               out[x*4 + 1] =  val;
-               out[x*4 + 2] =  val;
-               out[x*4 + 3] =  val;
+              int s = sqrt(sum1*sum1 + sum2*sum2);
+              val = s > 255? 255 : (unsigned char) s;
+              out[x*4 + 0] =  val;
+              out[x*4 + 1] =  val;
+              out[x*4 + 2] =  val;
+              out[x*4 + 3] =  val;
            }
            else{
    

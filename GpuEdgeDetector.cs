@@ -12,7 +12,7 @@ namespace HackathonBEST
     public class GpuEdgeDetector: EdgeDetector
     {
     [DllImport(@"NvidiaKernel.dll",  CallingConvention=CallingConvention.Cdecl)]
-    private static extern void run(byte[] red, byte[] x, int width, int height);
+    private static extern void run(byte[] red, byte[] x, int width, int height, float[] ms);
         public override void Execute()
         {
             BitmapImage bitmap = new BitmapImage();  
@@ -37,8 +37,10 @@ namespace HackathonBEST
             Console.WriteLine("skonczone kopiowanie");
             Console.WriteLine("odpalanie kernela");
             byte [] greyscale = new byte[bytes];
-            run(rgbValues, greyscale, width,height);
+            float [] ms = new float[1];
+            run(rgbValues, greyscale, width,height, ms);
             Console.WriteLine("zakonczenie kernela");
+            Console.WriteLine("Kernel took: " + ms[0] +" ms");
             Bitmap result = new Bitmap(width, height);
             BitmapData resultData = result.LockBits(rect, 
             ImageLockMode.ReadWrite, PixelFormat.Format32bppRgb);
@@ -46,7 +48,7 @@ namespace HackathonBEST
             var stop = DateTime.Now;
             result.UnlockBits(resultData);
             i.UnlockBits(bmpData);
-            result.Save("result.png",ImageFormat.Png);
+            result.Save(@"result.png",ImageFormat.Png);
             TimeSpan diff = stop - start;
             Console.Write(diff);
             using (MemoryStream mem = new MemoryStream())

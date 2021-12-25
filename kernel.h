@@ -8,7 +8,7 @@
 extern "C" {
 #endif
 
-	void __declspec(dllexport) run(char* red, char* out, int width, int height);
+	void __declspec(dllexport) run(char* red, char* out, int width, int height, float* ms);
 #ifdef __cplusplus
 }
 #endif
