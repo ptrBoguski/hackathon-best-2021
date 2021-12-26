@@ -54,6 +54,10 @@
                 <Label DockPanel.Dock="Left" FontWeight="Bold" Width="120">Treshold:</Label>
                 <Slider Maximum="255" Name="TresholdSlider" ValueChanged="TresholdSlider_OnValueChanged"/>
             </DockPanel>
+            <DockPanel VerticalAlignment="Center">
+                <Label DockPanel.Dock="Left" FontWeight="Bold" Width="220">Currently used mask: DEFAULT</Label>
+                <Button Name="ModifyMaskButton" Click="ModifyMaskButton_OnClick">Modify mask</Button>
+            </DockPanel>
         </StackPanel>
         <DockPanel Grid.Column="1" Grid.Row="1" Margin="5">
             <StackPanel Width="200" Margin="10,0,0,0">

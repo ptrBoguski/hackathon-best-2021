@@ -139,5 +139,11 @@ namespace HackathonBEST
             currentThreshold = e.NewValue;
             Console.WriteLine(currentThreshold);
         }
+
+        private void ModifyMaskButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            MaskEditor maskEditor = new MaskEditor();
+            maskEditor.ShowDialog();
+        }
     }
 }
