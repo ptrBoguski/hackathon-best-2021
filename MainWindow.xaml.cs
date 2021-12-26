@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 using Microsoft.Win32;
 using Path = System.IO.Path;
 
@@ -29,7 +30,7 @@ namespace HackathonBEST
         
         private DetectionMethod detectionMethod = DetectionMethod.CPU;
         private string currentFilePath;
-        
+
         public MainWindow()
         {
             InitializeComponent();
@@ -80,15 +81,31 @@ namespace HackathonBEST
 
         private void ExecuteButton_OnClick(object sender, RoutedEventArgs e)
         {
+            CurrentStatusText.Text = "Processing...";
+            AllowUIToUpdate();
             var edgeDetector = detectionMethod.GetEdgeDetector();
             edgeDetector.OnDetectionCompleted += DetectionCompleted;
             edgeDetector.Execute(currentFilePath);
         }
+        
+        void AllowUIToUpdate()
+        {
+            DispatcherFrame frame = new DispatcherFrame();
+            Dispatcher.CurrentDispatcher.BeginInvoke(DispatcherPriority.Render, new DispatcherOperationCallback(delegate (object parameter)
+            {
+                frame.Continue = false;
+                return null;
+            }), null);
+
+            Dispatcher.PushFrame(frame);
+            Application.Current.Dispatcher.Invoke(DispatcherPriority.Background, new Action(delegate { }));
+        }
 
         private void DetectionCompleted(BitmapImage image, TimeSpan duration)
         {
+            CurrentStatusText.Text = "Ready";
             DisplayOutputImage(image);
-            LastDurationText.Text = $"Last time: {duration.Seconds.ToString()}.{duration.Milliseconds}s";
+            LastDurationText.Text = $"Last time: {duration.Milliseconds}ms";
         }
         
         private void DisplayOutputImage(BitmapImage image)
