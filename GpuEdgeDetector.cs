@@ -13,7 +13,7 @@ namespace HackathonBEST
     {
         [DllImport(@"NvidiaKernel.dll",  CallingConvention=CallingConvention.Cdecl)]
         private static extern void run(byte[] red, byte[] x, int width, int height, float[] ms);
-        public override void Execute(string filePath)
+        public override void Execute(string filePath, double threshold)
         {
             var start = DateTime.Now;
             Bitmap i = new Bitmap(filePath);

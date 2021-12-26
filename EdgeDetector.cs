@@ -6,6 +6,6 @@ namespace HackathonBEST
     public abstract class EdgeDetector
     {
         public Action<BitmapImage, TimeSpan> OnDetectionCompleted;
-        public abstract void Execute(string filePath);
+        public abstract void Execute(string filePath, double threshold);
     }
 }

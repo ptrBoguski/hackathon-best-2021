@@ -30,6 +30,7 @@ namespace HackathonBEST
         
         private DetectionMethod detectionMethod = DetectionMethod.CPU;
         private string currentFilePath;
+        private double currentThreshold;
 
         public MainWindow()
         {
@@ -85,7 +86,7 @@ namespace HackathonBEST
             AllowUIToUpdate();
             var edgeDetector = detectionMethod.GetEdgeDetector();
             edgeDetector.OnDetectionCompleted += DetectionCompleted;
-            edgeDetector.Execute(currentFilePath);
+            edgeDetector.Execute(currentFilePath, currentThreshold);
         }
         
         void AllowUIToUpdate()
@@ -131,6 +132,12 @@ namespace HackathonBEST
         private void SaveButton_OnClick(object sender, RoutedEventArgs e)
         {
             throw new NotImplementedException();
+        }
+
+        private void TresholdSlider_OnValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            currentThreshold = e.NewValue;
+            Console.WriteLine(currentThreshold);
         }
     }
 }
