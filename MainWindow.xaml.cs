@@ -151,6 +151,7 @@ namespace HackathonBEST
                 currentYMask,
                 newMask=> currentXMask = newMask,
                 newMask => currentYMask = newMask);
+            maskEditor.Owner = this;
             maskEditor.ShowDialog();
         }
 
