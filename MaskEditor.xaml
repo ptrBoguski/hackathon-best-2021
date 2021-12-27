@@ -57,8 +57,8 @@
         
         <StackPanel Grid.Row="1" Grid.ColumnSpan="2" Orientation="Horizontal">
             <Button Margin="100, 10, 10,10" Height="40" Padding="10" Name="SaveButton" Click="SaveButton_OnClick">Save</Button>
-            <Button Margin="5,10" Height="40" Padding="10">Load default</Button>
-            <Button Margin="5,10" Height="40" Padding="10">Cancel</Button>
+            <Button Margin="5,10" Height="40" Padding="10" Name="LoadDefaultsButton" Click="LoadDefaultsButton_OnClick">Load default</Button>
+            <Button Margin="5,10" Height="40" Padding="10" Name="CancelButton" Click="CancelButton_OnClick">Cancel</Button>
         </StackPanel>
     </Grid>
 </Window>

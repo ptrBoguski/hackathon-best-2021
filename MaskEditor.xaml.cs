@@ -79,5 +79,20 @@ namespace HackathonBEST
             
             didInitialize = true;
         }
+
+        private void LoadDefaultsButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            didInitialize = false;
+            
+            xMask = new int[]{1,1,1,0,0,0,-1,-1,-1};
+            yMask = new int[]{1,0,-1,1,0,-1,1,0,-1};
+            
+            DisplayValuesFromMask();
+        }
+
+        private void CancelButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
     }
 }
