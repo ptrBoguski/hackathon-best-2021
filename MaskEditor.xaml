@@ -5,7 +5,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:local="clr-namespace:HackathonBEST"
         mc:Ignorable="d"
-        Title="MaskEditor" Height="300" Width="400">
+        Title="MaskEditor" Height="250" Width="400">
     <Grid ShowGridLines="False">
         <Grid.RowDefinitions>
             <RowDefinition Height="2*" />
@@ -17,14 +17,46 @@
         </Grid.ColumnDefinitions>
         
         <GroupBox Header="GX Mask" Margin="5,0,5,5">
-            
+            <StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="10">
+                    <TextBox Grid.Row="1" Name="GX1TextBox" TextChanged="UpdateValuesFromTextBoxes" Height="20" Width="30" Margin="10, 0"/>
+                    <TextBox Grid.Row="1" Name="GX4TextBox" TextChanged="UpdateValuesFromTextBoxes" Height="20" Width="30" Margin="10, 0"/>
+                    <TextBox Grid.Row="1" Name="GX7TextBox" TextChanged="UpdateValuesFromTextBoxes" Height="20" Width="30" Margin="10, 0"/>   
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="10">
+                    <TextBox Grid.Row="1" Name="GX2TextBox" TextChanged="UpdateValuesFromTextBoxes" Height="20" Width="30" Margin="10, 0"/>
+                    <TextBox Grid.Row="1" Name="GX5TextBox" TextChanged="UpdateValuesFromTextBoxes" Height="20" Width="30" Margin="10, 0"/>
+                    <TextBox Grid.Row="1" Name="GX8TextBox" TextChanged="UpdateValuesFromTextBoxes" Height="20" Width="30" Margin="10, 0"/>   
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="10">
+                    <TextBox Grid.Row="1" Name="GX3TextBox" TextChanged="UpdateValuesFromTextBoxes" Height="20" Width="30" Margin="10, 0"/>
+                    <TextBox Grid.Row="1" Name="GX6TextBox" TextChanged="UpdateValuesFromTextBoxes" Height="20" Width="30" Margin="10, 0"/>
+                    <TextBox Grid.Row="1" Name="GX9TextBox" TextChanged="UpdateValuesFromTextBoxes" Height="20" Width="30" Margin="10, 0"/>   
+                </StackPanel>
+            </StackPanel>
         </GroupBox>
         <GroupBox Grid.Column="1" Header="GY Mask" Margin="5,0,5,5">
-            
+            <StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="10">
+                    <TextBox Grid.Row="1" Name="GY1TextBox" TextChanged="UpdateValuesFromTextBoxes" Height="20" Width="30" Margin="10, 0"/>
+                    <TextBox Grid.Row="1" Name="GY4TextBox" TextChanged="UpdateValuesFromTextBoxes" Height="20" Width="30" Margin="10, 0"/>
+                    <TextBox Grid.Row="1" Name="GY7TextBox" TextChanged="UpdateValuesFromTextBoxes" Height="20" Width="30" Margin="10, 0"/>   
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="10">
+                    <TextBox Grid.Row="1" Name="GY2TextBox" TextChanged="UpdateValuesFromTextBoxes" Height="20" Width="30" Margin="10, 0"/>
+                    <TextBox Grid.Row="1" Name="GY5TextBox" TextChanged="UpdateValuesFromTextBoxes" Height="20" Width="30" Margin="10, 0"/>
+                    <TextBox Grid.Row="1" Name="GY8TextBox" TextChanged="UpdateValuesFromTextBoxes" Height="20" Width="30" Margin="10, 0"/>   
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="10">
+                    <TextBox Grid.Row="1" Name="GY3TextBox" TextChanged="UpdateValuesFromTextBoxes" Height="20" Width="30" Margin="10, 0"/>
+                    <TextBox Grid.Row="1" Name="GY6TextBox" TextChanged="UpdateValuesFromTextBoxes" Height="20" Width="30" Margin="10, 0"/>
+                    <TextBox Grid.Row="1" Name="GY9TextBox" TextChanged="UpdateValuesFromTextBoxes" Height="20" Width="30" Margin="10, 0"/>   
+                </StackPanel>
+            </StackPanel>
         </GroupBox>
         
         <StackPanel Grid.Row="1" Grid.ColumnSpan="2" Orientation="Horizontal">
-            <Button Margin="100, 10, 10,10" Height="40" Padding="10">Save</Button>
+            <Button Margin="100, 10, 10,10" Height="40" Padding="10" Name="SaveButton" Click="SaveButton_OnClick">Save</Button>
             <Button Margin="5,10" Height="40" Padding="10">Load default</Button>
             <Button Margin="5,10" Height="40" Padding="10">Cancel</Button>
         </StackPanel>

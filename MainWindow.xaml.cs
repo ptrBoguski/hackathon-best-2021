@@ -31,6 +31,8 @@ namespace HackathonBEST
         private DetectionMethod detectionMethod = DetectionMethod.CPU;
         private string currentFilePath;
         private double currentThreshold;
+        private int[] currentXMask = {1,2,3,4,5,6,7,8,9};
+        private int[] currentYMask = {1,2,3,4,5,6,7,8,9};
 
         public MainWindow()
         {
@@ -142,7 +144,11 @@ namespace HackathonBEST
 
         private void ModifyMaskButton_OnClick(object sender, RoutedEventArgs e)
         {
-            MaskEditor maskEditor = new MaskEditor();
+            MaskEditor maskEditor = new MaskEditor(
+                currentXMask,
+                currentYMask,
+                newMask=> currentXMask = newMask,
+                newMask => currentYMask = newMask);
             maskEditor.ShowDialog();
         }
     }
