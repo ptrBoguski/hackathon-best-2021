@@ -5,10 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HackathonBEST"
         mc:Ignorable="d"
-        Title="MainWindow" Height="500" Width="800">
+        Title="MainWindow" Height="550" Width="800">
     <Grid ShowGridLines="False">    
         <Grid.RowDefinitions>
-            <RowDefinition Height="5*" />
+            <RowDefinition Height="3*" />
             <RowDefinition Height="1*" />
             <RowDefinition Height="20" />
         </Grid.RowDefinitions>
@@ -49,14 +49,24 @@
                 </StackPanel> 
             </DockPanel>
         </GroupBox>
-        <StackPanel Grid.Row="1" Margin="5">
+        <StackPanel Grid.Row="1" Margin="5,0,5,5">
             <DockPanel VerticalAlignment="Center">
-                <Label DockPanel.Dock="Left" FontWeight="Bold" Width="120">Treshold:</Label>
-                <Slider Maximum="255" Name="TresholdSlider" ValueChanged="TresholdSlider_OnValueChanged"/>
+                <Label DockPanel.Dock="Left" FontWeight="Bold" Width="60">Treshold:</Label>
+                <Slider Maximum="255" Name="TresholdSlider" ValueChanged="TresholdSlider_OnValueChanged" Width="250" TickFrequency="0.1" IsSnapToTickEnabled="True"/>
+                <TextBlock Text="{Binding ElementName=TresholdSlider, Path=Value, StringFormat=N2, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" TextAlignment="Right" Width="40" />
             </DockPanel>
             <DockPanel VerticalAlignment="Center">
-                <Label DockPanel.Dock="Left" FontWeight="Bold" Width="220">Currently used mask: DEFAULT</Label>
+                <Label DockPanel.Dock="Left" FontWeight="Bold" Width="60">Sigma:</Label>
+                <Slider Maximum="3" Name="SigmaSlider" ValueChanged="SigmaSlider_OnValueChanged" Width="250" TickFrequency="0.1" IsSnapToTickEnabled="True"/>
+                <TextBlock Text="{Binding ElementName=SigmaSlider, Path=Value, StringFormat=N2, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" TextAlignment="Right" Width="40" />
+            </DockPanel>
+            <DockPanel VerticalAlignment="Center">
+                <Label DockPanel.Dock="Left" FontWeight="Bold" Width="220">Currently used mask:</Label>
                 <Button Name="ModifyMaskButton" Click="ModifyMaskButton_OnClick">Modify mask</Button>
+            </DockPanel>
+            <DockPanel VerticalAlignment="Center">
+                <CheckBox Margin="10" Name="GaussianCheckbox" Click="GaussianCheckbox_OnClick">Gaussian filter</CheckBox>
+                <CheckBox Margin="10" Name="MaximumSupressionChecbox" Click="MaximumSupressionChecbox_OnClick">Non maximum suppresion</CheckBox>
             </DockPanel>
         </StackPanel>
         <DockPanel Grid.Column="1" Grid.Row="1" Margin="5">

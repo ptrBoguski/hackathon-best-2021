@@ -31,8 +31,11 @@ namespace HackathonBEST
         private DetectionMethod detectionMethod = DetectionMethod.CPU;
         private string currentFilePath;
         private double currentThreshold;
-        private int[] currentXMask = {1,2,3,4,5,6,7,8,9};
-        private int[] currentYMask = {1,2,3,4,5,6,7,8,9};
+        private double currentSigma;
+        private bool gaussianEnabled = false;
+        private bool maxSupressionEnabled = false;
+        private int[] currentXMask = {1,1,1,0,0,0,-1,-1,-1};
+        private int[] currentYMask = {1,0,-1,1,0,-1,1,0,-1};
 
         public MainWindow()
         {
@@ -88,7 +91,7 @@ namespace HackathonBEST
             AllowUIToUpdate();
             var edgeDetector = detectionMethod.GetEdgeDetector();
             edgeDetector.OnDetectionCompleted += DetectionCompleted;
-            edgeDetector.Execute(currentFilePath, currentThreshold);
+            edgeDetector.Execute(currentFilePath, currentXMask, currentYMask, currentThreshold, currentSigma, gaussianEnabled, maxSupressionEnabled);
         }
         
         void AllowUIToUpdate()
@@ -139,7 +142,6 @@ namespace HackathonBEST
         private void TresholdSlider_OnValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             currentThreshold = e.NewValue;
-            Console.WriteLine(currentThreshold);
         }
 
         private void ModifyMaskButton_OnClick(object sender, RoutedEventArgs e)
@@ -150,6 +152,21 @@ namespace HackathonBEST
                 newMask=> currentXMask = newMask,
                 newMask => currentYMask = newMask);
             maskEditor.ShowDialog();
+        }
+
+        private void SigmaSlider_OnValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            currentSigma = SigmaSlider.Value;
+        }
+
+        private void GaussianCheckbox_OnClick(object sender, RoutedEventArgs e)
+        {
+            gaussianEnabled = GaussianCheckbox.IsChecked ?? false;
+        }
+
+        private void MaximumSupressionChecbox_OnClick(object sender, RoutedEventArgs e)
+        {
+            maxSupressionEnabled = MaximumSupressionChecbox.IsChecked ?? false;
         }
     }
 }
