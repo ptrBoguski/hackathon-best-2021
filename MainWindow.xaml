@@ -52,7 +52,7 @@
         <StackPanel Grid.Row="1" Margin="5,0,5,5">
             <DockPanel VerticalAlignment="Center">
                 <Label DockPanel.Dock="Left" FontWeight="Bold" Width="60">Treshold:</Label>
-                <Slider Maximum="255" Name="TresholdSlider" ValueChanged="TresholdSlider_OnValueChanged" Width="250" TickFrequency="0.1" IsSnapToTickEnabled="True"/>
+                <Slider Maximum="255" Name="TresholdSlider" ValueChanged="TresholdSlider_OnValueChanged" Thumb.DragCompleted="TresholdSlider_OnDragCompleted" Width="250" TickFrequency="0.1" IsSnapToTickEnabled="True"/>
                 <TextBlock Text="{Binding ElementName=TresholdSlider, Path=Value, StringFormat=N2, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" TextAlignment="Right" Width="40" />
             </DockPanel>
             <DockPanel VerticalAlignment="Center">
@@ -77,7 +77,7 @@
             </StackPanel>
             <DockPanel Margin="0,0,10,0">
                 <Button DockPanel.Dock="Top" Height="40" Margin="0,0,0,5" Name="ExecuteButton" Click="ExecuteButton_OnClick">Execute</Button>
-                <CheckBox>Enable auto execute</CheckBox>
+                <CheckBox Name="AutoExecuteCheckBox" Click="AutoExecuteCheckBox_OnClick">Enable auto execute</CheckBox>
             </DockPanel>
             
             
