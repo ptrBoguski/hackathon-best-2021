@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -155,12 +156,13 @@ namespace HackathonBEST
         private void SaveButton_OnClick(object sender, RoutedEventArgs e)
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.DefaultExt = ".png";
             if (saveFileDialog.ShowDialog() == true)
             {
                 BitmapEncoder encoder = new PngBitmapEncoder();
                 encoder.Frames.Add(BitmapFrame.Create(outputImage));
 
-                using (var fileStream = new System.IO.FileStream(saveFileDialog.FileName + ".png", System.IO.FileMode.Create))
+                using (var fileStream = new System.IO.FileStream(saveFileDialog.FileName, System.IO.FileMode.Create))
                 {
                     encoder.Save(fileStream);
                 }
