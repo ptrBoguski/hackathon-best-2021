@@ -22,12 +22,12 @@ There are many options which allow you to change how to algorithm will be execut
 
 **GPU/CPU** radio buttons allow you to either run the algorithm on your processor or your graphics card provided that you have a NVIDIA graphics card. If you try to run it without a proper hardware you should see a black empty image in the output panel in which case you should change the method to CPU.
 
-**Treshold** slider allows you to pick how sensitive the detection method will be to different pixel values - i.e. a pixel will appear as white only if it is above the threshold values.
+**Threshold** slider allows you to pick how sensitive the detection method will be to different pixel values - i.e. a pixel will appear as white only if it is above the threshold values.
 
-**Sigma** placeholder.
+**Sigma** regulates gaussian filter. Lower value - less blur.
 
 **Modify mask** opens a panel in which you can change the desired edge mask. You can use it with the default values or you can modify them - for example if you only want to detect horizontal edges you can set the *Y* mask values to 0.
 
-**Gausian Filter** placeholder.
+**Gausian Filter** enables Gaussian Filter - blurs image (GPU Only).
 
-**Non maximum suppression** placeholder.
+**Non maximum suppression** enables Non Maximum Suppression - suppressing all pixels that are not part in local maxima (GPU Only).

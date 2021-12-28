@@ -1,13 +1,15 @@
 #include <math.h>
+#include <iostream>
 
 extern "C"
 { 
     //TODO 
-__declspec(dllexport) void run(char *red, char *out, int width, int height)
+__declspec(dllexport) void run(char *red, char *out, int width, int height, int threshold)
 {
        int radius = 1;
        int ix = 0;
        int stride = 1;
+       std::cout<<threshold<<" - threshold value\n";
        for(int x = ix ; x < width*height;x += stride){
            int pos_x = x % width;
            int pos_y = x / width;
@@ -36,6 +38,7 @@ __declspec(dllexport) void run(char *red, char *out, int width, int height)
               }
               int s = sqrt(sum1*sum1 + sum2*sum2);
               val = s > 255? 255 : (unsigned char) s;
+              val = val  < threshold ? 0 : val; 
               out[x*4 + 0] =  val;
               out[x*4 + 1] =  val;
               out[x*4 + 2] =  val;
@@ -44,11 +47,12 @@ __declspec(dllexport) void run(char *red, char *out, int width, int height)
            else{
    
                out[x*4 + 0] = 255;
-               out[x*4 + 1] = 201;
-               out[x*4 + 2] = 175;
-               out[x*4 + 3] = 158;
+               out[x*4 + 1] = 255;
+               out[x*4 + 2] = 255;
+               out[x*4 + 3] = 255;
            }
        }
+       
        // 0 - B 1 - G 2 - R 3 - Alpha?
 }
 }

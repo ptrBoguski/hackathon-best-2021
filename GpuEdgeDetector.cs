@@ -12,12 +12,11 @@ namespace HackathonBEST
     public class GpuEdgeDetector: EdgeDetector
     {
         [DllImport(@"NvidiaKernel.dll",  CallingConvention=CallingConvention.Cdecl)]
-        private static extern void run(byte[] red, byte[] x, int width, int height, float[] ms);
+        private static extern void run(byte[] red, byte[] x, int width, int height, float[] ms, int threshold, float sigma, bool gaussian, bool nms, float[] sobelGx,float[] sobelGy);
         public override void Execute(string filePath, float[] xMask, float[] yMask, double threshold, double sigma, bool gaussian, bool supression)
         {
             var start = DateTime.Now;
             Bitmap i = new Bitmap(filePath);
-            Console.WriteLine(i);
             int width = i.Width;
             int height = i.Height;
             Rectangle rect = new Rectangle(0,0, width, height);
@@ -27,13 +26,9 @@ namespace HackathonBEST
             int bytes  = i.Width * i.Height * 4;
             byte[] rgbValues = new byte[bytes];
             Marshal.Copy(ptr, rgbValues, 0, bytes);
-            Console.WriteLine("skonczone kopiowanie");
-            Console.WriteLine("odpalanie kernela");
             byte [] greyscale = new byte[bytes];
             float [] ms = new float[1];
-            run(rgbValues, greyscale, width,height, ms);
-            Console.WriteLine("zakonczenie kernela");
-            Console.WriteLine("Kernel took: " + ms[0] +" ms");
+            run(rgbValues, greyscale, width,height, ms, (int)threshold, (float)sigma, gaussian, supression, xMask, yMask);
             Bitmap result = new Bitmap(width, height);
             BitmapData resultData = result.LockBits(rect, 
             ImageLockMode.ReadWrite, PixelFormat.Format32bppRgb);
