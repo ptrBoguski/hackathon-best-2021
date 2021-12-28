@@ -33,12 +33,12 @@ namespace HackathonBEST
         
         private DetectionMethod detectionMethod = DetectionMethod.CPU;
         private string currentFilePath;
-        private double currentThreshold;
-        private double currentSigma;
-        private bool gaussianEnabled = false;
-        private bool maxSupressionEnabled = false;
-        private int[] currentXMask = {1,1,1,0,0,0,-1,-1,-1};
-        private int[] currentYMask = {1,0,-1,1,0,-1,1,0,-1};
+        private double currentThreshold = 0;
+        private double currentSigma = 1.2;
+        private bool gaussianEnabled = true;
+        private bool maxSupressionEnabled = true;
+        private float[] currentXMask = {1,1,1,0,0,0,-1,-1,-1};
+        private float[] currentYMask = {1,0,-1,1,0,-1,1,0,-1};
         private bool autoExecuteEnabled = false;
         private BitmapImage outputImage;
 
@@ -121,7 +121,7 @@ namespace HackathonBEST
         {
             CurrentStatusText.Text = "Ready";
             DisplayOutputImage(image);
-            LastDurationText.Text = $"Last time: {duration.Milliseconds}ms";
+            LastDurationText.Text = $"Last time: {duration.Seconds}.{duration.Milliseconds}s";
         }
         
         private void DisplayOutputImage(BitmapImage image)

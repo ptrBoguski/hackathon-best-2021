@@ -6,12 +6,12 @@ namespace HackathonBEST
 {
     public partial class MaskEditor : Window
     {
-        private int[] xMask;
-        private int[] yMask;
-        private Action<int[]> xMaskSetter;
-        private Action<int[]> yMaskSetter;
+        private float[] xMask;
+        private float[] yMask;
+        private Action<float[]> xMaskSetter;
+        private Action<float[]> yMaskSetter;
         private bool didInitialize = false;
-        public MaskEditor(int[] xMask, int[]yMask, Action<int[]> xMaskSetter, Action<int[]> yMaskSetter)
+        public MaskEditor(float[] xMask, float[]yMask, Action<float[]> xMaskSetter, Action<float[]> yMaskSetter)
         {
             InitializeComponent();
             this.xMask = xMask;
@@ -32,25 +32,25 @@ namespace HackathonBEST
         {
             if (!didInitialize) return;
             
-            Int32.TryParse(GX1TextBox.Text, out xMask[0]);
-            Int32.TryParse(GX2TextBox.Text, out xMask[1]);
-            Int32.TryParse(GX3TextBox.Text, out xMask[2]);
-            Int32.TryParse(GX4TextBox.Text, out xMask[3]);
-            Int32.TryParse(GX5TextBox.Text, out xMask[4]);
-            Int32.TryParse(GX6TextBox.Text, out xMask[5]);
-            Int32.TryParse(GX7TextBox.Text, out xMask[6]);
-            Int32.TryParse(GX8TextBox.Text, out xMask[7]);
-            Int32.TryParse(GX9TextBox.Text, out xMask[8]);
+            float.TryParse(GX1TextBox.Text, out xMask[0]);
+            float.TryParse(GX2TextBox.Text, out xMask[1]);
+            float.TryParse(GX3TextBox.Text, out xMask[2]);
+            float.TryParse(GX4TextBox.Text, out xMask[3]);
+            float.TryParse(GX5TextBox.Text, out xMask[4]);
+            float.TryParse(GX6TextBox.Text, out xMask[5]);
+            float.TryParse(GX7TextBox.Text, out xMask[6]);
+            float.TryParse(GX8TextBox.Text, out xMask[7]);
+            float.TryParse(GX9TextBox.Text, out xMask[8]);
             
-            Int32.TryParse(GY1TextBox.Text, out yMask[0]);
-            Int32.TryParse(GY2TextBox.Text, out yMask[1]);
-            Int32.TryParse(GY3TextBox.Text, out yMask[2]);
-            Int32.TryParse(GY4TextBox.Text, out yMask[3]);
-            Int32.TryParse(GY5TextBox.Text, out yMask[4]);
-            Int32.TryParse(GY6TextBox.Text, out yMask[5]);
-            Int32.TryParse(GY7TextBox.Text, out yMask[6]);
-            Int32.TryParse(GY8TextBox.Text, out yMask[7]);
-            Int32.TryParse(GY9TextBox.Text, out yMask[8]);
+            float.TryParse(GY1TextBox.Text, out yMask[0]);
+            float.TryParse(GY2TextBox.Text, out yMask[1]);
+            float.TryParse(GY3TextBox.Text, out yMask[2]);
+            float.TryParse(GY4TextBox.Text, out yMask[3]);
+            float.TryParse(GY5TextBox.Text, out yMask[4]);
+            float.TryParse(GY6TextBox.Text, out yMask[5]);
+            float.TryParse(GY7TextBox.Text, out yMask[6]);
+            float.TryParse(GY8TextBox.Text, out yMask[7]);
+            float.TryParse(GY9TextBox.Text, out yMask[8]);
 
             
         }
@@ -84,8 +84,8 @@ namespace HackathonBEST
         {
             didInitialize = false;
             
-            xMask = new int[]{1,1,1,0,0,0,-1,-1,-1};
-            yMask = new int[]{1,0,-1,1,0,-1,1,0,-1};
+            xMask = new float[]{1,1,1,0,0,0,-1,-1,-1};
+            yMask = new float[]{1,0,-1,1,0,-1,1,0,-1};
             
             DisplayValuesFromMask();
         }
