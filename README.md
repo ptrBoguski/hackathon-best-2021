@@ -30,4 +30,4 @@ There are many options which allow you to change how to algorithm will be execut
 
 **Gausian Filter** enables Gaussian Filter - blurs image (GPU Only).
 
-**Non maximum suppression** enables Non Maximum Suppression - suppressing all pixels that are not part in local maxima (GPU Only).
+**Non maximum suppression** enables Non Maximum Suppression - suppressing all pixels that are not part of local maxima (GPU Only).
