@@ -121,7 +121,7 @@ namespace HackathonBEST
         {
             CurrentStatusText.Text = "Ready";
             DisplayOutputImage(image);
-            LastDurationText.Text = $"Last time: {duration.Seconds}.{duration.Milliseconds}s";
+            LastDurationText.Text = $"Last time: {duration.Seconds}s {duration.Milliseconds}ms";
         }
         
         private void DisplayOutputImage(BitmapImage image)
