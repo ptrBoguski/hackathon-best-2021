@@ -196,13 +196,12 @@ void run(char *input_pixels, char *out, int width, int height, float *ms,
   cudaEventCreate(&stop);
   cudaEventRecord(start);
   unsigned char *r, *gauss_output, *device_output, *sobel_output;
-  float *sobel_gradient, *temp;
+  float *sobel_gradient;
   cudaMalloc((void **)&r, sizeof(char) * width * height * 4);
   cudaMalloc((void **)&device_output, sizeof(char) * width * height * 4);
   cudaMalloc((void **)&sobel_output, sizeof(char) * width * height * 4);
   cudaMalloc((void **)&sobel_gradient, sizeof(float) * width * height);
   cudaMalloc((void **)&gauss_output, sizeof(char) * width * height * 4);
-  temp = new float[width * height];
   int radius = GAUSS_RADIUS;
 
   int gaussian_elements = (radius * 2 + 1) * (radius * 2 + 1);
@@ -219,12 +218,7 @@ void run(char *input_pixels, char *out, int width, int height, float *ms,
              cudaMemcpyHostToDevice);
   cudaMemcpy(sobel_kernel_Gy, sobel_Gy, sizeof(float) * 9,
              cudaMemcpyHostToDevice);
-  for (int i = 0; i < gaussian_elements; i++) {
-    printf("%f ", gaussian[i]);
-    if ((i + 1) % (2 * radius + 1) == 0) {
-      printf("\n");
-    }
-  }
+
   cudaMemcpy(r, input_pixels, sizeof(char) * width * height * 4, cudaMemcpyHostToDevice);
   if(enable_gauss)
     gauss<<<8, 512>>>(r, gauss_output, gauss_device, 2, width, height);
@@ -239,8 +233,16 @@ void run(char *input_pixels, char *out, int width, int height, float *ms,
   }
   else
    cudaMemcpy(out, sobel_output, sizeof(char) * width * height * 4, cudaMemcpyDeviceToHost);
-  cudaEventRecord(stop);
+  cudaFree(r);
+  cudaFree(device_output);
+  cudaFree(sobel_output);
+  cudaFree(sobel_gradient);
+  cudaFree(gauss_output);
+  cudaFree(gauss_device);
+  cudaFree(sobel_kernel_Gx);
+  cudaFree(sobel_kernel_Gy);
+  delete gaussian;
   cudaEventSynchronize(stop);
   cudaEventElapsedTime(&ms[0], start, stop);
-  printf("processing time: %f\n", ms[0]);
+//   printf("\nprocessing time: %f\n", ms[0]);
 }
